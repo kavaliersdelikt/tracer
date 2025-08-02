@@ -25,19 +25,27 @@ jobs:
           server-id: github
           settings-path: ${{ github.workspace }}
 
-      - name: Check Java and Maven versions
+      - name: Diagnostic
         run: |
           echo "JAVA_HOME=$JAVA_HOME"
+          echo "Which java:"
+          which java
           java -version
+
+          echo "Which mvn:"
+          which mvn
           mvn -version
 
-      - name: Build with Maven
+      - name: Build with Maven (force JDK 21)
         run: |
+          export JAVA_HOME=$JAVA_HOME
           export PATH="$JAVA_HOME/bin:$PATH"
-          mvn -B package --file pom.xml
+          java -version
+          mvn -B clean package --file pom.xml
 
-      - name: Publish to GitHub Packages Apache Maven
+      - name: Publish to GitHub Packages (force JDK 21)
         run: |
+          export JAVA_HOME=$JAVA_HOME
           export PATH="$JAVA_HOME/bin:$PATH"
           mvn deploy -s $GITHUB_WORKSPACE/settings.xml
         env:
