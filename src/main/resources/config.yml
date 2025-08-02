@@ -1,0 +1,240 @@
+# Tracer Plugin Configuration
+# A comprehensive performance analysis tool for Minecraft servers
+
+# General Settings
+general:
+  # Enable debug mode for detailed logging
+  debug: false
+  # Plugin language (future feature)
+  language: 'en'
+  # Check for updates on startup
+  check-updates: true
+
+# Scan Settings
+scanning:
+  # Enable automatic scanning
+  enabled: true
+  # Seconds between automatic scans
+  interval: 30
+  # Chunks around players to scan (radius)
+  radius: 5
+  # Maximum chunks to process per tick (performance limiting)
+  max-chunks-per-tick: 10
+  # Enable asynchronous scanning for better performance
+  async-scanning: true
+  # Scan only loaded chunks
+  loaded-chunks-only: true
+  # Minimum time between scans of the same chunk (seconds)
+  chunk-cooldown: 60
+  
+  # Server-wide scanning settings
+  server-wide:
+    # Enable automatic server-wide scans (disabled by default)
+    enabled: false
+    # Interval between server-wide scans in seconds (default: 1 hour)
+    interval: 3600
+    # Timestamp of last server-wide scan (managed automatically)
+    last-scan: 0
+
+# Lag Detection Thresholds
+thresholds:
+  # Entity count thresholds
+  entities:
+    warning: 50
+    critical: 100
+    # Include specific entity types in counting
+    count-passive: true
+    count-hostile: true
+    count-items: true
+    count-vehicles: true
+  
+  # Tile entity (block entity) thresholds
+  tile-entities:
+    warning: 20
+    critical: 40
+    # Specific tile entities to monitor
+    monitor-hoppers: true
+    monitor-furnaces: true
+    monitor-chests: true
+    monitor-redstone: true
+  
+  # Active redstone component thresholds
+  redstone:
+    warning: 10
+    critical: 25
+    # Include powered blocks in count
+    count-powered-blocks: true
+    # Include redstone dust in count
+    count-redstone-dust: true
+  
+  # Overall lag score thresholds (0-100)
+  overall-score:
+    warning: 70
+    critical: 90
+  
+  # TPS-based thresholds
+  tps:
+    warning: 18.0
+    critical: 15.0
+
+# Visualization Settings
+visualization:
+  # Enable particle effects
+  particles:
+    enabled: true
+    # Particle type for different lag levels
+    low-lag: 'HAPPY_VILLAGER'
+    medium-lag: 'FLAME'
+    high-lag: 'LAVA'
+    critical-lag: 'SMOKE'
+    # Particle density (particles per chunk)
+    density: 5
+    # Particle height offset from chunk center
+    height-offset: 2.0
+    # Particle display duration (ticks)
+    duration: 100
+  
+  # Floating text (holograms)
+  floating-text:
+    enabled: true
+    # Display duration in seconds
+    duration: 10
+    # Height above chunk center
+    height: 3.0
+    # Show detailed information
+    show-details: true
+    # Text format: {score}, {entities}, {tile_entities}, {redstone}
+    format: '&bLag Score: &f{score}\n&7Entities: &f{entities}\n&7Tile Entities: &f{tile_entities}'
+  
+  # Action bar messages
+  action-bar:
+    enabled: true
+    # Show when entering a chunk
+    show-on-enter: true
+    # Update interval (ticks)
+    update-interval: 20
+    # Message format
+    format: '&bChunk Lag: &f{score} &7| &bEntities: &f{entities}'
+  
+  # Color scheme for different lag levels
+  colors:
+    low: '&a'      # Green
+    medium: '&e'   # Yellow
+    high: '&c'     # Red
+    critical: '&4' # Dark Red
+    info: '&b'     # Aqua
+    success: '&a'  # Green
+    warning: '&6'  # Gold
+    error: '&c'    # Red
+  
+  # Chunk border highlighting
+  borders:
+    enabled: false
+    # Block type for borders
+    block-type: 'GLOWSTONE'
+    # Border duration (seconds)
+    duration: 30
+
+# Performance Settings
+performance:
+  # Maximum memory usage for caching (MB)
+  max-memory-usage: 50
+  # Cache duration for chunk analysis (seconds)
+  cache-duration: 300
+  # Enable performance monitoring of the plugin itself
+  self-monitoring: true
+  # Automatically reduce scanning during high server load
+  adaptive-scanning: true
+  # TPS threshold for adaptive scanning
+  adaptive-tps-threshold: 17.0
+  # Maximum concurrent async tasks
+  max-async-tasks: 4
+
+# Data Storage Settings
+storage:
+  # Enable data persistence
+  enabled: true
+  # Storage type: 'file' or 'database' (future feature)
+  type: 'file'
+  # Data retention period (days)
+  retention-days: 7
+  # Auto-cleanup old data
+  auto-cleanup: true
+  # Export format: 'json' or 'csv'
+  export-format: 'json'
+
+# Integration Settings
+integrations:
+  # PlaceholderAPI support
+  placeholderapi:
+    enabled: true
+  
+  # WorldGuard integration
+  worldguard:
+    enabled: true
+    # Respect region permissions
+    respect-regions: true
+    # Exclude protected regions from scanning
+    exclude-protected: false
+  
+  # bStats metrics
+  metrics:
+    enabled: true
+
+# Command Settings
+commands:
+  # Enable command aliases
+  aliases: true
+  # Command cooldown (seconds)
+  cooldown: 5
+  # Maximum scan radius for manual scans
+  max-scan-radius: 10
+  # Enable tab completion
+  tab-completion: true
+
+# Message Configuration
+messages:
+  # Command messages
+  scan-started: '{info}Starting chunk analysis in radius {radius}...'
+  scan-complete: '{success}Analysis complete! Found {high_lag_chunks} problematic chunks.'
+  scan-no-chunks: '{warning}No chunks found to analyze.'
+  scan-cooldown: '{warning}Please wait {time} seconds before scanning again.'
+  
+  # Visualization messages
+  visualization-enabled: '{success}Lag visualization enabled.'
+  visualization-disabled: '{info}Lag visualization disabled.'
+  visualization-cleared: '{info}All visual indicators cleared.'
+  
+  # Info messages
+  chunk-info: '{info}Chunk ({x}, {z}) - Lag Score: {score}\n{info}Entities: {entities} | Tile Entities: {tile_entities} | Redstone: {redstone}'
+  no-data: '{warning}No lag data available for this chunk.'
+  
+  # Admin messages
+  config-reloaded: '{success}Tracer configuration reloaded successfully.'
+  threshold-updated: '{success}Threshold for {type} updated to {value}.'
+  interval-updated: '{success}Scan interval updated to {interval} seconds.'
+  
+  # Error messages
+  no-permission: '{error}You do not have permission to use this command.'
+  invalid-command: '{error}Invalid command usage. Use /tracer help for assistance.'
+  invalid-number: '{error}Invalid number: {input}'
+  command-error: '{error}An error occurred while executing the command.'
+  
+  # Status messages
+  plugin-status: |
+    {info}&l=== Tracer Status ===
+    {info}Version: &f{version}
+    {info}Scanning: &f{scanning_status}
+    {info}Cached Chunks: &f{cached_chunks}
+    {info}Memory Usage: &f{memory_usage}MB
+    {info}Uptime: &f{uptime}
+  
+  # Help messages
+  help-header: '{info}&l=== Tracer Commands ==='
+  help-scan: '{info}/tracer scan [radius] &7- Scan chunks for lag'
+  help-toggle: '{info}/tracer toggle &7- Toggle visualization'
+  help-info: '{info}/tracer info &7- Show chunk information'
+  help-reload: '{info}/tracer reload &7- Reload configuration'
+  help-status: '{info}/tracer status &7- Show plugin status'
+  help-clear: '{info}/tracer clear &7- Clear visual indicators'
+  help-footer: '{info}Use /tracer <command> for more details.'

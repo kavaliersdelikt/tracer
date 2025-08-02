@@ -1,0 +1,97 @@
+name: Tracer
+version: '1.0.0'
+main: com.tracer.plugin.TracerPlugin
+api-version: '1.21'
+load: POSTWORLD
+author: Kavaliersdelikt
+description: 'A comprehensive Minecraft plugin for analyzing and visualizing server performance issues'
+website: 'https://modrinth.com/project/tracer'
+
+commands:
+  tracer:
+    description: 'Main Tracer command for performance analysis'
+    usage: '/tracer <subcommand> [args]'
+    aliases: ['ll', 'lag']
+    permission: tracer.use
+    permission-message: '&cYou do not have permission to use Tracer commands.'
+
+permissions:
+  tracer.*:
+    description: 'Grants access to all Tracer features'
+    children:
+      tracer.use: true
+      tracer.scan: true
+      tracer.toggle: true
+      tracer.info: true
+      tracer.teleport: true
+      tracer.autoscan: true
+      tracer.admin: true
+      tracer.reload: true
+    default: op
+  
+  tracer.use:
+    description: 'Basic permission to use Tracer commands'
+    default: true
+  
+  tracer.scan:
+    description: 'Permission to use the scan command'
+    default: op
+  
+  tracer.scan.server:
+    description: 'Permission to perform server-wide scans'
+    default: op
+  
+  tracer.toggle:
+    description: 'Permission to toggle visualization mode'
+    default: op
+  
+  tracer.info:
+    description: 'Permission to view chunk lag information'
+    default: op
+  
+  tracer.admin:
+    description: 'Permission to use administrative commands'
+    children:
+      tracer.threshold: true
+      tracer.interval: true
+      tracer.clear: true
+      tracer.export: true
+      tracer.status: true
+    default: op
+  
+  tracer.reload:
+    description: 'Permission to reload the plugin configuration'
+    default: op
+  
+  tracer.threshold:
+    description: 'Permission to adjust lag thresholds'
+    default: op
+  
+  tracer.interval:
+    description: 'Permission to change scan intervals'
+    default: op
+  
+  tracer.clear:
+    description: 'Permission to clear visual indicators'
+    default: op
+  
+  tracer.export:
+    description: 'Permission to export lag data'
+    default: op
+  
+  tracer.status:
+    description: 'Permission to view plugin status'
+    default: op
+  
+  tracer.teleport:
+    description: 'Permission to teleport to high-lag chunks'
+    default: op
+  
+  tracer.autoscan:
+    description: 'Allows managing automatic scanning settings'
+    default: op
+
+soft-depend:
+  - PlaceholderAPI
+  - WorldGuard
+  - Vault
