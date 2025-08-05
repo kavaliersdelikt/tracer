@@ -4,6 +4,9 @@ Tracer helps server administrators identify performance bottlenecks by visualizi
 ## What it does
 This plugin scans your server's chunks to find areas causing lag. When it detects problems, it shows you exactly where they are using colorful particles and helpful messages. You can then teleport directly to these problem areas to fix them.
 
+## Support
+I offer support for this project on Discord, simply shoot me a DM "kavaliersdelikt.", or open a issue.
+
 ## Main Features
 Visual Feedback
 
