@@ -23,6 +23,7 @@ permissions:
       tracer.scan: true
       tracer.toggle: true
       tracer.info: true
+      tracer.version: true
       tracer.teleport: true
       tracer.autoscan: true
       tracer.admin: true
@@ -48,6 +49,10 @@ permissions:
   tracer.info:
     description: 'Permission to view chunk lag information'
     default: op
+  
+  tracer.version:
+    description: 'Permission to view plugin version information'
+    default: true
   
   tracer.admin:
     description: 'Permission to use administrative commands'

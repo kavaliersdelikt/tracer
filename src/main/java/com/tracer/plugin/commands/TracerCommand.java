@@ -55,6 +55,7 @@ public final class TracerCommand implements CommandExecutor, TabCompleter {
         this.subCommands.put("debug", new DebugCommand(this.plugin));
         this.subCommands.put("teleport", new TeleportCommand(this.plugin));
         this.subCommands.put("autoscan", new AutoScanCommand(this.plugin));
+        this.subCommands.put("version", new VersionCommand(this.plugin));
         this.subCommands.put("help", new HelpCommand(this.plugin, this.subCommands));
     }
     
